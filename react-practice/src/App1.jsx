@@ -1,3 +1,14 @@
+// Given this data:
+//    const people = [
+//      { name: "Zoe", age: 34 },
+//      { name: "Anna", age: 22 },
+//      { name: "Mike", age: 29 },
+//    ];
+// Build a React component that:
+// 	•	Displays the list.
+// 	•	Has two buttons: “Sort by Name” and “Sort by Age.”
+// 	•	Clicking a button sorts the list accordingly.
+
 import { useState } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
