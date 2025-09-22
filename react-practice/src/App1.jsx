@@ -1,3 +1,4 @@
+// PART 1
 // Given this data:
 //    const people = [
 //      { name: "Zoe", age: 34 },
@@ -8,6 +9,9 @@
 // 	•	Displays the list.
 // 	•	Has two buttons: “Sort by Name” and “Sort by Age.”
 // 	•	Clicking a button sorts the list accordingly.
+//
+// PART 2
+// Extend this to add a search box that filters peoples names as you type
 
 import { useState } from 'react'
 
@@ -19,6 +23,7 @@ const people = [
 
 function App1() {
   const [list, setList] = useState(people)
+  const [query, setQuery] = useState('')
 
   const sortByName = () => {
     // 1. never mutate state directly, copy first
@@ -32,9 +37,23 @@ function App1() {
     setList(sortedList)
   }
 
+  const visible = list.filter(person =>
+    person.name.toLowerCase().includes(query.toLowerCase().trim())
+  );
+
   return (
     <div style={{ padding: 16 }}>
       <div style={{ display: "flex", gap: 8, marginBottom: 12 }}>
+        <input
+          type="text"
+          placeholder="Search by name"
+          value={query}
+          onChange={e => {
+            const value = e.target.value
+            setQuery(value)
+            // setList(visible)
+          }}
+        />
         <button onClick={sortByName}>
           Sort by name
         </button>
@@ -44,7 +63,7 @@ function App1() {
         </div>
 
         <ul>
-          {list.map((person, index) => (
+          {visible.map((person, index) => (
             // using index for small exercise, real app should use unique id (more stable)
             <li key={index}>{person.name} - {person.age}</li>
           ))} 
