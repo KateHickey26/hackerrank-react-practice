@@ -1,8 +1,8 @@
 // Given this data:
 //    const people = [
 //      { name: "Zoe", age: 34 },
-//      { name: "Anna", age: 22 },
-//      { name: "Mike", age: 29 },
+//      { name: "Anna", age: 20 },
+//      { name: "Mike", age: 22 },
 //    ];
 // Build a React component that:
 // 	•	Displays the list.
@@ -10,37 +10,47 @@
 // 	•	Clicking a button sorts the list accordingly.
 
 import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
 
-function App() {
-  const [count, setCount] = useState(0)
+const people = [
+  { name: "Zoe", age: 34 },
+  { name: "Anna", age: 29 },
+  { name: "Mike", age: 22 },
+];
+
+function App1() {
+  const [list, setList] = useState(people)
+
+  const sortByName = () => {
+    // 1. never mutate state directly, copy first
+    // 2. using localeCompare for proper alphabetical sorting
+    const sortedList = [...list].sort((a, b) => a.name.localeCompare(b.name))
+    setList(sortedList)
+  }
+
+  const sortByAge = () => {
+    const sortedList = [...list].sort((a, b) => a.age - b.age)
+    setList(sortedList)
+  }
 
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
+    <div style={{ padding: 16 }}>
+      <div style={{ display: "flex", gap: 8, marginBottom: 12 }}>
+        <button onClick={sortByName}>
+          Sort by name
         </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
+        <button onClick={sortByAge}>
+          Sort by age
+        </button>
+        </div>
+
+        <ul>
+          {list.map((person, index) => (
+            // using index for small exercise, real app should use unique id (more stable)
+            <li key={index}>{person.name} - {person.age}</li>
+          ))} 
+        </ul>
       </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+  );
 }
 
-export default App
+export default App1
