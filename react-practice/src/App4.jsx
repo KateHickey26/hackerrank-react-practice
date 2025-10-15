@@ -1,3 +1,5 @@
+// get posts from https://jsonplaceholder.typicode.com/posts
+
 import React, { useEffect, useState} from 'react';
 import axios from 'axios';
 

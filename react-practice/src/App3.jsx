@@ -3,6 +3,9 @@
 // 	•	shows them in a list
 // 	•	includes a search box that filters posts by title (case-insensitive)
 
+// get posts
+// search bo to filter
+
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
